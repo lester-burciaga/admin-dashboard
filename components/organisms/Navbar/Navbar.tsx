@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../img/logo.png';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import logo from '@/img/logo.png';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 function Navbar() {
   return (

@@ -1,7 +1,31 @@
+import { DashboardCard } from '@/components/molecules/DashboardCard';
+import { Folder, MessageCircle, Newspaper, User } from 'lucide-react';
+
 export default function Home() {
   return (
     <>
-      <h1 className='text-2xl font-bold'>Dashboard</h1>
+      <div className='flex flex-col md:flex-row justify-between gap-5 mb-5'>
+        <DashboardCard
+          title='Posts'
+          count={10}
+          icon={<Newspaper className='text-slate-500' size={72} />}
+        />
+        <DashboardCard
+          title='Categories'
+          count={8}
+          icon={<Folder className='text-slate-500' size={72} />}
+        />
+        <DashboardCard
+          title='Users'
+          count={300}
+          icon={<User className='text-slate-500' size={72} />}
+        />
+        <DashboardCard
+          title='Comments'
+          count={120}
+          icon={<MessageCircle className='text-slate-500' size={72} />}
+        />
+      </div>
     </>
   );
 }
