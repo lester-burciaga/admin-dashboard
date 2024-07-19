@@ -1,6 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 
-import type { DashboardCardProps } from './DashboardCardProps.type';
+import type { DashboardCardProps } from './DashboardCardProps';
 
 export default function DashboardCard({
   title,
