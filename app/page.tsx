@@ -1,5 +1,8 @@
 import { DashboardCard } from '@/components/molecules/DashboardCard';
 import { Folder, MessageCircle, Newspaper, User } from 'lucide-react';
+import { PostTable } from '@/components/organisms/PostTable';
+
+import posts from '@/data/post';
 
 export default function Home() {
   return (
@@ -26,6 +29,8 @@ export default function Home() {
           icon={<MessageCircle className='text-slate-500' size={72} />}
         />
       </div>
+
+      <PostTable limit={6} posts={posts} />
     </>
   );
 }
