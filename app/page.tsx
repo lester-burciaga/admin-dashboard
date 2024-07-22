@@ -1,8 +1,10 @@
 import { DashboardCard } from '@/components/molecules/DashboardCard';
 import { Folder, MessageCircle, Newspaper, User } from 'lucide-react';
 import { PostTable } from '@/components/organisms/PostTable';
+import { AnalyticsChart } from '@/components/organisms/AnalyticsChart';
 
 import posts from '@/data/post';
+import data from '@/data/analytics';
 
 export default function Home() {
   return (
@@ -29,7 +31,13 @@ export default function Home() {
           icon={<MessageCircle className='text-slate-500' size={72} />}
         />
       </div>
-
+      <AnalyticsChart
+        title={'Analytics For This Year'}
+        description={'Views Per Month'}
+        lineDataKey={'uniqueViews'}
+        xAxisDataKey={'name'}
+        data={data}
+      />
       <PostTable limit={6} posts={posts} />
     </>
   );
