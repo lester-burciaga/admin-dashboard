@@ -1,4 +1,4 @@
 import AnalyticsChart from './AnalyticsChart';
-import AnalyticsChartProps from './AnalyticsChartProps';
+import type AnalyticsChartProps from './AnalyticsChartProps';
 
 export { AnalyticsChart, AnalyticsChartProps };
