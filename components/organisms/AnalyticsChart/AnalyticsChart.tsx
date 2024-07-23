@@ -14,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import data from '@/data/analytics';
 import type { AnalyticsChartProps } from './AnalyticsChartProps';
 
 /**

@@ -14,7 +14,8 @@ import type { PostTableProps } from './PostTableProps';
 /**
  * @typedef PostTableProps
  *
- * Table of posts published in the blog
+ * Table of posts published in the blog.
+ *
  */
 export default function PostTable({ limit, title, posts }: PostTableProps) {
   // Sort the posts by date in descending order
