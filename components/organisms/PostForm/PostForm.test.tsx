@@ -26,6 +26,25 @@ const getSubmitButton = () => {
   });
 };
 
+// Fill form function
+async function fillForm() {
+  // Input form values
+  await act(() => {
+    fireEvent.change(screen.getByLabelText('Title'), {
+      target: { value: 'New Title' },
+    });
+    fireEvent.change(screen.getByLabelText('Body'), {
+      target: { value: 'New Body' },
+    });
+    fireEvent.change(screen.getByLabelText('Author'), {
+      target: { value: 'New Author' },
+    });
+    fireEvent.change(screen.getByLabelText('Date'), {
+      target: { value: 'New Date' },
+    });
+  });
+}
+
 describe('<PostForm />', () => {
   beforeEach(() => {
     render(
@@ -94,31 +113,33 @@ describe('<PostForm />', () => {
         screen.getByText('Date is required')
       ).toBeInTheDocument();
     });
+
+    it('should "Submit" button be disabled', async () => {
+      const submitButton = getSubmitButton();
+
+      expect(submitButton).toBeDisabled();
+    });
   });
 
   describe('with valid data', () => {
     it('should submits the form with the correct values', async () => {
       const submitButton = getSubmitButton();
 
-      // Input form values
       await act(() => {
-        fireEvent.change(screen.getByLabelText('Title'), {
-          target: { value: 'New Title' },
-        });
-        fireEvent.change(screen.getByLabelText('Body'), {
-          target: { value: 'New Body' },
-        });
-        fireEvent.change(screen.getByLabelText('Author'), {
-          target: { value: 'New Author' },
-        });
-        fireEvent.change(screen.getByLabelText('Date'), {
-          target: { value: 'New Date' },
-        });
-
+        // Call fill form function
+        fillForm();
         fireEvent.click(submitButton);
       });
 
       expect(mockHandleSubmit).toHaveBeenCalledTimes(1);
+    });
+
+    it('should "Submit" button be enabled', async () => {
+      const submitButton = getSubmitButton();
+      // Call fill form function
+      fillForm();
+
+      expect(submitButton).not.toBeDisabled();
     });
   });
 });

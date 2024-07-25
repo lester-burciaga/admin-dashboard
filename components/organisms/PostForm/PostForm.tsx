@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { useForm } from 'react-hook-form';
+import { useForm, useFormState } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
@@ -37,6 +37,8 @@ export default function PostForm({
       date: post?.date || '',
     },
   });
+
+  const { isDirty, isValid } = useFormState(form);
 
   return (
     <Form {...form}>
@@ -121,6 +123,7 @@ export default function PostForm({
         <Button
           className='w-full mt-4 dark:bg-slate-800 dark:text-white md:w-auto md:float-right'
           type='submit'
+          disabled={!isValid}
         >
           Submit
         </Button>
