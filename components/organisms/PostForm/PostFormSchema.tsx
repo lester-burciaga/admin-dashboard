@@ -1,5 +1,13 @@
 import * as z from 'zod';
 
+/**
+ * @typedef PostFormSchema
+ *
+ * Validation schema for the post form using zod validation library.
+ *
+ * https://zod.dev/?id=basic-usage
+ *
+ */
 export const PostFormSchema = z.object({
   title: z
     .string()

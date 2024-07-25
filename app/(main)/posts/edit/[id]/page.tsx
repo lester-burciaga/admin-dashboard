@@ -6,6 +6,7 @@ import { PostForm } from '@/components/organisms/PostForm';
 
 import posts from '@/data/post';
 
+// Page parameters
 interface PostEditPageProps {
   params: {
     id: string;
