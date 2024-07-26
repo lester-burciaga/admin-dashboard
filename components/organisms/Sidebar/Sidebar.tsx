@@ -21,7 +21,7 @@ import {
 export default function Sidebar() {
   return (
     <>
-      <Command className='bg-blue-100 rounded-none'>
+      <Command className='bg-blue-200 rounded-none dark:bg-blue-700'>
         <CommandInput placeholder='Type a command or search...' />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
