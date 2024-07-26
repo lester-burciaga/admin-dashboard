@@ -38,7 +38,7 @@ export default function PostForm({
     },
   });
 
-  const { isDirty, isValid } = useFormState(form);
+  const { isValid } = useFormState(form);
 
   return (
     <Form {...form}>
