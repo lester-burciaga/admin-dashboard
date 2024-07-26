@@ -3,6 +3,7 @@ import * as z from 'zod';
 import { BackButton } from '@/components/molecules/BackButton';
 import { PostFormSchema } from '@/components/organisms/PostForm/PostFormSchema';
 import { PostForm } from '@/components/organisms/PostForm';
+import { useToast } from '@/components/ui/use-toast';
 
 import posts from '@/data/post';
 
@@ -22,6 +23,7 @@ interface PostEditPageProps {
 export default function PostEditPage({
   params,
 }: PostEditPageProps) {
+  const { toast } = useToast();
   // Find the post with the given ID
   const post = posts.find((post) => post.id === params.id);
 
@@ -30,6 +32,14 @@ export default function PostEditPage({
     data: z.infer<typeof PostFormSchema>
   ) {
     console.log(data);
+    // Update the post in the database
+    // TODO
+
+    // Show a success toast
+    toast({
+      title: 'Post has been updated successfully',
+      description: `Updated by ${data?.author} on ${data?.date}.`,
+    });
   }
 
   return (
