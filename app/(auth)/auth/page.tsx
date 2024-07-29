@@ -1,3 +1,5 @@
+import { AuthTabs } from '@/components/molecules/AuthTabs';
+
 /**
  *
  * Auth Page
@@ -6,7 +8,11 @@
  * to prevent namespace collisions with 'main' page.
  */
 function AuthPage() {
-  return <div>Auth</div>;
+  return (
+    <>
+      <AuthTabs />
+    </>
+  );
 }
 
 export default AuthPage;
