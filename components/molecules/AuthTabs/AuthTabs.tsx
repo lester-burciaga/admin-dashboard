@@ -1,3 +1,5 @@
+'use client';
+import { LoginForm } from '@/components/organisms/LoginForm';
 import {
   Tabs,
   TabsContent,
@@ -5,6 +7,12 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs';
 
+/**
+ *
+ * @typeDef AuthTabs
+ *
+ * Tabs used to switch between login and register forms
+ */
 export default function AuthTabs() {
   return (
     <Tabs defaultValue='login' className='w-[400px]'>
@@ -12,7 +20,9 @@ export default function AuthTabs() {
         <TabsTrigger value='login'>Login</TabsTrigger>
         <TabsTrigger value='register'>Register</TabsTrigger>
       </TabsList>
-      <TabsContent value='login'>Login.</TabsContent>
+      <TabsContent value='login'>
+        <LoginForm />
+      </TabsContent>
       <TabsContent value='register'>Register.</TabsContent>
     </Tabs>
   );
