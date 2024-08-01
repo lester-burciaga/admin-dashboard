@@ -1,5 +1,4 @@
 import {
-  act,
   fireEvent,
   render,
   screen,
@@ -87,7 +86,7 @@ describe('<LoginForm />', () => {
     });
   });
 
-  describe('when "Submit" button is clicked', () => {
+  describe('when "Sign in" button is clicked', () => {
     beforeEach(() => {
       // Input form values
       fillForm();

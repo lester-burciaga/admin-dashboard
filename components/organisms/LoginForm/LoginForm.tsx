@@ -22,9 +22,9 @@ import { Input } from '@/components/ui/input';
 import { LoginFormSchema } from './LoginFormSchema';
 
 /**
- * @typedef PostForm
+ * @typedef LoginForm
  *
- * Form used for editing posts with react-hook-form and zod validation
+ * Form used for user login using react-hook-form and zod validation
  *
  * https://react-hook-form.com/get-started
  * https://zod.dev/?id=installation
