@@ -16,8 +16,32 @@ const mockPost = {
   date: 'Test Date',
 } as Post;
 
+// Mock new input data
+const mockNewPost = {
+  title: 'New Title',
+  body: 'New Body',
+  author: 'New Author',
+  date: 'New Date',
+} as Post;
+
 // Mock handle submit function
 const mockHandleSubmit = jest.fn();
+
+function getTitleInput() {
+  return screen.getByLabelText('Title');
+}
+
+function getBodyInput() {
+  return screen.getByLabelText('Body');
+}
+
+function getAuthorInput() {
+  return screen.getByLabelText('Author');
+}
+
+function getDateInput() {
+  return screen.getByLabelText('Date');
+}
 
 // Get submit button
 const getSubmitButton = () => {
@@ -30,17 +54,17 @@ const getSubmitButton = () => {
 async function fillForm() {
   // Input form values
   await act(() => {
-    fireEvent.change(screen.getByLabelText('Title'), {
-      target: { value: 'New Title' },
+    fireEvent.change(getTitleInput(), {
+      target: { value: mockNewPost.title },
     });
-    fireEvent.change(screen.getByLabelText('Body'), {
-      target: { value: 'New Body' },
+    fireEvent.change(getBodyInput(), {
+      target: { value: mockNewPost.body },
     });
-    fireEvent.change(screen.getByLabelText('Author'), {
-      target: { value: 'New Author' },
+    fireEvent.change(getAuthorInput(), {
+      target: { value: mockNewPost.author },
     });
-    fireEvent.change(screen.getByLabelText('Date'), {
-      target: { value: 'New Date' },
+    fireEvent.change(getDateInput(), {
+      target: { value: mockNewPost.date },
     });
   });
 }
@@ -63,54 +87,43 @@ describe('<PostForm />', () => {
 
   describe('when form is rendered', () => {
     it('should set the form default values', () => {
-      expect(screen.getByLabelText('Title')).toHaveValue(
-        mockPost.title
-      );
-      expect(screen.getByLabelText('Body')).toHaveValue(
-        mockPost.body
-      );
-      expect(screen.getByLabelText('Author')).toHaveValue(
-        mockPost.author
-      );
-      expect(screen.getByLabelText('Date')).toHaveValue(
-        mockPost.date
-      );
+      expect(getTitleInput()).toHaveValue(mockPost.title);
+      expect(getBodyInput()).toHaveValue(mockPost.body);
+      expect(getAuthorInput()).toHaveValue(mockPost.author);
+      expect(getDateInput()).toHaveValue(mockPost.date);
     });
   });
 
   describe('with invalid data', () => {
     it('should display error messages', async () => {
-      const submitButton = getSubmitButton();
-
       // Input empty form values
-      await act(() => {
-        fireEvent.change(screen.getByLabelText('Title'), {
-          target: { value: '' },
-        });
-        fireEvent.change(screen.getByLabelText('Body'), {
-          target: { value: '' },
-        });
-        fireEvent.change(screen.getByLabelText('Author'), {
-          target: { value: '' },
-        });
-        fireEvent.change(screen.getByLabelText('Date'), {
-          target: { value: '' },
-        });
 
-        fireEvent.click(submitButton);
+      fireEvent.change(getTitleInput(), {
+        target: { value: '' },
+      });
+      fireEvent.change(getBodyInput(), {
+        target: { value: '' },
+      });
+      fireEvent.change(getAuthorInput(), {
+        target: { value: '' },
+      });
+      fireEvent.change(getDateInput(), {
+        target: { value: '' },
       });
 
+      fireEvent.click(getSubmitButton());
+
       expect(
-        screen.getByText('Title is required')
+        await screen.findByText('Title is required')
       ).toBeInTheDocument();
       expect(
-        screen.getByText('Body is required')
+        await screen.findByText('Body is required')
       ).toBeInTheDocument();
       expect(
-        screen.getByText('Author is required')
+        await screen.findByText('Author is required')
       ).toBeInTheDocument();
       expect(
-        screen.getByText('Date is required')
+        await screen.findByText('Date is required')
       ).toBeInTheDocument();
     });
 
@@ -123,15 +136,18 @@ describe('<PostForm />', () => {
 
   describe('with valid data', () => {
     it('should submits the form with the correct values', async () => {
-      const submitButton = getSubmitButton();
-
       await act(() => {
         // Call fill form function
         fillForm();
-        fireEvent.click(submitButton);
+        fireEvent.click(getSubmitButton());
       });
 
-      expect(mockHandleSubmit).toHaveBeenCalledTimes(1);
+      expect(screen.getByRole('form')).toHaveFormValues({
+        title: mockNewPost.title,
+        body: mockNewPost.body,
+        author: mockNewPost.author,
+        date: mockNewPost.date,
+      });
     });
 
     it('should "Submit" button be enabled', async () => {

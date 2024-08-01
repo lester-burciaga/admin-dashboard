@@ -1,4 +1,5 @@
 import {
+  act,
   fireEvent,
   render,
   screen,
@@ -42,35 +43,39 @@ function getConfirmPasswordInput() {
 
 // Fill form function using invalid data
 function fillFormWithInvalidData() {
-  fireEvent.input(getNameInput(), {
-    target: { value: '' },
-  });
-  fireEvent.input(getEmailInput(), {
-    target: { value: 'fake@email' },
-  });
+  act(() => {
+    fireEvent.input(getNameInput(), {
+      target: { value: '' },
+    });
+    fireEvent.input(getEmailInput(), {
+      target: { value: 'fake@email' },
+    });
 
-  fireEvent.input(getPasswordInput(), {
-    target: { value: '' },
-  });
+    fireEvent.input(getPasswordInput(), {
+      target: { value: '' },
+    });
 
-  fireEvent.input(getConfirmPasswordInput(), {
-    target: { value: '' },
+    fireEvent.input(getConfirmPasswordInput(), {
+      target: { value: '' },
+    });
   });
 }
 
 // Fill form function using valid data
 function fillFormWithValidData() {
-  fireEvent.input(getNameInput(), {
-    target: { value: mockName },
-  });
-  fireEvent.input(getEmailInput(), {
-    target: { value: mockEmail },
-  });
-  fireEvent.input(getPasswordInput(), {
-    target: { value: mockPassword },
-  });
-  fireEvent.input(getConfirmPasswordInput(), {
-    target: { value: mockConfirmPassword },
+  act(() => {
+    fireEvent.input(getNameInput(), {
+      target: { value: mockName },
+    });
+    fireEvent.input(getEmailInput(), {
+      target: { value: mockEmail },
+    });
+    fireEvent.input(getPasswordInput(), {
+      target: { value: mockPassword },
+    });
+    fireEvent.input(getConfirmPasswordInput(), {
+      target: { value: mockConfirmPassword },
+    });
   });
 }
 
@@ -116,6 +121,7 @@ describe('<RegisterForm />', () => {
       // Fill form
       fillFormWithInvalidData();
 
+      // Click submit button
       fireEvent.click(getSubmitButton());
 
       const nameErrorMessage = await screen.findByText(
@@ -145,11 +151,13 @@ describe('<RegisterForm />', () => {
         // Fill form
         fillFormWithInvalidData();
 
-        fireEvent.input(getConfirmPasswordInput(), {
-          target: { value: 'abc123' },
-        });
+        act(() => {
+          fireEvent.input(getConfirmPasswordInput(), {
+            target: { value: 'abc123' },
+          });
 
-        fireEvent.click(getSubmitButton());
+          fireEvent.click(getSubmitButton());
+        });
 
         const confirmPasswordErrorMessage =
           await screen.findByText(
