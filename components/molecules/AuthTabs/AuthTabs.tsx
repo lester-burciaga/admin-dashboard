@@ -1,5 +1,6 @@
 'use client';
 import { LoginForm } from '@/components/organisms/LoginForm';
+import { RegisterForm } from '@/components/organisms/RegisterForm';
 import {
   Tabs,
   TabsContent,
@@ -23,7 +24,9 @@ export default function AuthTabs() {
       <TabsContent value='login'>
         <LoginForm />
       </TabsContent>
-      <TabsContent value='register'>Register.</TabsContent>
+      <TabsContent value='register'>
+        <RegisterForm />
+      </TabsContent>
     </Tabs>
   );
 }
