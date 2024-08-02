@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  basePath: '/admin-dashboard',
+  output: 'export',
+  reactStrictMode: true,
 };
 
 export default nextConfig;
